@@ -9,4 +9,6 @@ Repo contains coursework and programming assignments for CVIP
 - [X] PA1 (1D-2D Convolution, Histogram Equalization)
 - [X] HW3 (Image Filtering, 2D Fourier Transform, Image Features and Matching, Clustering and Segmentation)
 - [X] PA2 (Stereo Vision, Image Segmentation)
-- [ ] HW4
+- [X] HW4 (Computational Photography, Stereo Vision, Optical Flow)
+- [ ] PA3 (Image Based Search Engine)
+- [ ] HW5 (Visual Tracking, Object Detection and Recognition)
