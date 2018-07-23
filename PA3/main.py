@@ -28,6 +28,8 @@ for (query, queryFeatures) in index.items():
     # load the query image and display it
     path = os.path.join(args["dataset"], query)
     queryImage = cv2.imread(path)
+    queryImage = cv2.resize(queryImage,(400,166))
+
     cv2.imshow("Query", queryImage)
     print("query: {}".format(query))
  
@@ -45,6 +47,7 @@ for (query, queryFeatures) in index.items():
         (score, imageName) = results[j]
         path = os.path.join(args["dataset"], imageName)
         result = cv2.imread(path)
+        result = cv2.resize(result, (400,166))
         print("\t{}. {} : {:.3f}".format(j + 1, imageName, score))
  
         # check to see if the first montage should be used
