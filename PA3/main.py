@@ -21,6 +21,7 @@ searcher = Searcher(index)
 
 # loop over images in the index -- we will use each one as
 # a query image
+output = {}
 for (query, queryFeatures) in index.items():
     # perform the search using the current query
     results = searcher.search(queryFeatures)
@@ -30,7 +31,7 @@ for (query, queryFeatures) in index.items():
     queryImage = cv2.imread(path)
     queryImage = cv2.resize(queryImage,(400,166))
 
-    cv2.imshow("Query", queryImage)
+    #cv2.imshow("Query", queryImage)
     print("query: {}".format(query))
  
     # initialize the two montages to display our results --
@@ -40,6 +41,7 @@ for (query, queryFeatures) in index.items():
     montageA = np.zeros((166 * 5, 400, 3), dtype = "uint8")
     montageB = np.zeros((166 * 5, 400, 3), dtype = "uint8")
  
+    output[str(query)] = []
     # loop over the top ten results
     for j in range(0, 10):
         # grab the result (we are using row-major order) and
@@ -50,6 +52,7 @@ for (query, queryFeatures) in index.items():
         result = cv2.resize(result, (400,166))
         print("\t{}. {} : {:.3f}".format(j + 1, imageName, score))
  
+        output[str(query)].append([imageName, score])
         # check to see if the first montage should be used
         if j < 5:
             montageA[j * 166:(j + 1) * 166, :] = result
@@ -59,6 +62,8 @@ for (query, queryFeatures) in index.items():
             montageB[(j - 5) * 166:((j - 5) + 1) * 166, :] = result
  
     # show the results
-    cv2.imshow("Results 1-5", montageA)
-    cv2.imshow("Results 6-10", montageB)
-    cv2.waitKey(0)
+
+    cv2.imwrite('./results/query_'+query,queryImage)
+    cv2.imwrite('./results/mA_'+query, montageA)
+    cv2.imwrite('./results/mB_'+query, montageB)
+
